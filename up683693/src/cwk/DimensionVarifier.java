@@ -25,11 +25,11 @@ public class DimensionVarifier extends InputVerifier {
                 tb.setBackground(Color.WHITE);
                 return true;
             }
+            else System.err.println("User has entered invalid data. Out of range");
         }
         catch(NumberFormatException nfe) {
-            System.err.println("User has entered invalid data. What a n00b");
+            System.err.println(nfe + " User has entered invalid data. Wrong type.");
         }
-//        System.err.println("Shouldn't be here. Uncreachable in DimensionVarifier");
         tb.setText("Lol wut");
         tb.setBackground(Color.red);
         return false;
