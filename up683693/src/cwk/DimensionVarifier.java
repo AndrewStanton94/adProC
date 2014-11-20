@@ -15,7 +15,6 @@ import javax.swing.*;
 public class DimensionVarifier extends InputVerifier {
     // Referenced https://docs.oracle.com/javase/7/docs/api/javax/swing/InputVerifier.html
     // 13/11/14 23:35
-    // Use of abstract class. Investigate
 
     public boolean verify(JComponent input) {
         JTextField tb = (JTextField) input;
