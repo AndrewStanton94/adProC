@@ -6,6 +6,7 @@
 package cwk;
 
 import java.util.ArrayList;
+import javax.swing.*;
 
 /**
  *
@@ -96,7 +97,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(boxHeightTB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(areaLabel)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         dimensionPanelLayout.setVerticalGroup(
             dimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,18 +116,38 @@ public class MainFrame extends javax.swing.JFrame {
         boxDepthTB.setInputVerifier(dv);
         boxHeightTB.setInputVerifier(dv);
 
-        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
+        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
+        cardGradeCoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardGradeCoBActionPerformed(evt);
+            }
+        });
 
         jLabel2.setLabelFor(cardGradeCoB);
         jLabel2.setText("Card Grade");
 
         jLabel3.setText("Colours");
 
-        numColorsCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No colours", "1 Colours", "2 Colours" }));
+        numColorsCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No colours", "1 Colour", "2 Colours" }));
+        numColorsCoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numColorsCoBActionPerformed(evt);
+            }
+        });
 
         reinforcedBottomChB.setText("Reinforced Bottom");
+        reinforcedBottomChB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reinforcedBottomChBActionPerformed(evt);
+            }
+        });
 
         reinforcedCornersChB.setText("Reinforced Corners");
+        reinforcedCornersChB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reinforcedCornersChBActionPerformed(evt);
+            }
+        });
 
         sealableTopChB.setText("Sealable Top");
 
@@ -149,12 +170,13 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(numColorsCoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cardGradeCoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(reinforcedBottomChB)
-                                    .addComponent(sealableTopChB))
+                                .addComponent(reinforcedBottomChB)
                                 .addGap(18, 18, 18)
                                 .addComponent(reinforcedCornersChB)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(sealableTopChB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,7 +198,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(reinforcedCornersChB))
                 .addGap(18, 18, 18)
                 .addComponent(sealableTopChB)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -256,9 +278,123 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println();
     }//GEN-LAST:event_boxListValueChanged
 
+    private void cardGradeCoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardGradeCoBActionPerformed
+        JComboBox cb = (JComboBox)evt.getSource();
+        
+        switch (cb.getSelectedItem().toString()){
+            case "Card Grade":
+                // Pass
+                return;
+            case "Grade 1":
+                // 0 CP
+                // !RB
+                setLockChB(reinforcedBottomChB, false);
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
+                
+            case "Grade 2":
+                // 0 .. 2 CP
+                // ?RB
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
+                
+            case "Grade 3":
+                // 0 .. 2 CP
+                // ?RB
+                // ?RC
+                return;
+                
+            case "Grade 4":
+                // 1 .. 2 CP
+                // ?RB
+                // ?RC
+                return;
+                
+            case "Grade 5":
+                // 2 CP
+                // ?RB
+                // ?RC
+                return;
+            
+        }
+    }//GEN-LAST:event_cardGradeCoBActionPerformed
+
+    private void numColorsCoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numColorsCoBActionPerformed
+        JComboBox cb = (JComboBox) evt.getSource();
+        
+        switch(cb.getSelectedItem().toString()){
+            case "No colour":
+                // 1 ..3 Cg
+                // !RB
+                setLockChB(reinforcedBottomChB, false);
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
+                    
+            case "1 Colour":
+                // 2 .. 4 Cg
+                // !RB
+                setLockChB(reinforcedBottomChB, false);
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
+            case "2 Colours":
+                // 2 .. 5 Cg
+                // ?RB
+                // ?RC
+                return;
+        }
+    }//GEN-LAST:event_numColorsCoBActionPerformed
+
+    private void reinforcedBottomChBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinforcedBottomChBActionPerformed
+        JCheckBox chB = (JCheckBox) evt.getSource();
+        if (chB.getSelectedObjects() == null){
+            // 1 .. 5 cg
+            // 2 cp
+            // !RC
+            setLockChB(reinforcedCornersChB, false);
+        }
+        else{
+            // 2 .. 5 cg
+            // 2 cp
+            // ?RC
+        }
+    }//GEN-LAST:event_reinforcedBottomChBActionPerformed
+
+    private void reinforcedCornersChBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinforcedCornersChBActionPerformed
+        JCheckBox chB = (JCheckBox) evt.getSource();
+        if (chB.getSelectedObjects() == null){
+            // 1 .. 5 cg
+            // 0 .. 2 cp
+            // ?RB
+        }
+        else{
+            // 3 .. 5 cg
+            //  cp
+            // RB
+            setLockChB(reinforcedBottomChB, true);
+        }
+    }//GEN-LAST:event_reinforcedCornersChBActionPerformed
+
+    //<editor-fold defaultstate="collapsed" desc="gui element mutators">
+    private void setLockChB( JCheckBox chB, boolean state){
+        chB.setEnabled(false);
+        chB.setSelected(state);
+    }
+    
+    private void filterLists(JComboBox coB, Object[] validOptions){
+        ComboBoxModel cbm = coB.getModel();
+        System.out.println(cbm.toString());
+        LOOK HERE
+    }
+    //</editor-fold>
+    
     /**
      * @param args the command line arguments
      */
+            
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -137,15 +137,16 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="reinforcedBottomChB" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="sealableTopChB" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="reinforcedBottomChB" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="reinforcedCornersChB" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="sealableTopChB" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -174,7 +175,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="sealableTopChB" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -201,7 +202,7 @@
                       <Component id="boxHeightTB" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="areaLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="121" max="32767" attributes="0"/>
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -261,15 +262,19 @@
         <Component class="javax.swing.JComboBox" name="cardGradeCoB">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Grade 1"/>
-                <StringItem index="1" value="Grade 2"/>
-                <StringItem index="2" value="Grade 3"/>
-                <StringItem index="3" value="Grade 4"/>
-                <StringItem index="4" value="Grade 5"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Card Grade"/>
+                <StringItem index="1" value="Grade 1"/>
+                <StringItem index="2" value="Grade 2"/>
+                <StringItem index="3" value="Grade 3"/>
+                <StringItem index="4" value="Grade 4"/>
+                <StringItem index="5" value="Grade 5"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cardGradeCoBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -289,21 +294,30 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
                 <StringItem index="0" value="No colours"/>
-                <StringItem index="1" value="1 Colours"/>
+                <StringItem index="1" value="1 Colour"/>
                 <StringItem index="2" value="2 Colours"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="numColorsCoBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="reinforcedBottomChB">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reinforced Bottom"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reinforcedBottomChBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="reinforcedCornersChB">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reinforced Corners"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reinforcedCornersChBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="sealableTopChB">
           <Properties>
