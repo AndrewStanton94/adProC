@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cwk;
 
 /**
@@ -18,6 +13,25 @@ public abstract class Box {
 
     public double getArea() {
         return width * depth * height;
+    }
+    
+    public double getPrice(){
+        double baseCost = getArea() * PRICECONSTANT;
+        double fullCost = baseCost;
+        
+        if (getNumberOfColors() > 1){
+            if (getNumberOfColors() == 2)
+                fullCost += baseCost * 0.15;
+            else
+                fullCost += baseCost * 0.12;
+        }
+        
+        fullCost += hasReinforcedBottom()  ? baseCost * 0.12 : 0;
+        fullCost += hasReinforcedCorners() ? baseCost * 0.08 : 0;
+        
+        fullCost += hasSealedTop() ? baseCost * 0.06 : 0;
+        
+        return fullCost * getQty();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Accessors">

@@ -387,7 +387,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void filterLists(JComboBox coB, Object[] validOptions){
         ComboBoxModel cbm = coB.getModel();
         System.out.println(cbm.toString());
-        LOOK HERE
     }
     //</editor-fold>
     
