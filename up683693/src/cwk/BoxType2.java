@@ -11,6 +11,7 @@ package cwk;
  */
 public class BoxType2 extends Box{
     public final static double PRICECONSTANT = 0.59;
+    public final static BoxDescriptor boxDesc = new BoxDescriptor(2, 4, 1, false, false);
     
     public BoxType2(double width, double depth, double height,
             boolean sealedTop,
@@ -18,4 +19,7 @@ public class BoxType2 extends Box{
         super(width, depth, height, false, false, sealedTop, cardGrade, 1, qty);
     }
     
+    public static BoxDescriptor getDescription() {
+        return boxDesc;
+    }
 }

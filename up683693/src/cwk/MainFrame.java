@@ -6,13 +6,16 @@
 package cwk;
 
 import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.ComboBoxModel;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 
 /**
  *
  * @author Andrew
  */
 public class MainFrame extends javax.swing.JFrame {
+
     protected ArrayList<Box> order = new ArrayList();
 
     /**
@@ -271,7 +274,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addToOrderBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderBTNActionPerformed
-        
+        BoxMaker bm = new BoxMaker(Double.parseDouble(boxWidthTB.getText()),
+                Double.parseDouble(boxWidthTB.getText()),
+                Double.parseDouble(boxHeightTB.getText()),
+                false, false, false, /* TODO: get ChB values */
+                cardGradeCoB.getSelectedIndex(), numColorsCoB.getSelectedIndex(),
+                (int) qtySpn.getValue());
+        System.out.println(bm.getType());
     }//GEN-LAST:event_addToOrderBTNActionPerformed
 
     private void boxListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_boxListValueChanged
@@ -279,9 +288,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_boxListValueChanged
 
     private void cardGradeCoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardGradeCoBActionPerformed
-        JComboBox cb = (JComboBox)evt.getSource();
-        
-        switch (cb.getSelectedItem().toString()){
+        JComboBox cb = (JComboBox) evt.getSource();
+
+        switch (cb.getSelectedItem().toString()) {
             case "Card Grade":
                 // Pass
                 return;
@@ -292,39 +301,39 @@ public class MainFrame extends javax.swing.JFrame {
                 // !RC
                 setLockChB(reinforcedCornersChB, false);
                 return;
-                
+
             case "Grade 2":
                 // 0 .. 2 CP
                 // ?RB
                 // !RC
                 setLockChB(reinforcedCornersChB, false);
                 return;
-                
+
             case "Grade 3":
                 // 0 .. 2 CP
                 // ?RB
                 // ?RC
                 return;
-                
+
             case "Grade 4":
                 // 1 .. 2 CP
                 // ?RB
                 // ?RC
                 return;
-                
+
             case "Grade 5":
                 // 2 CP
                 // ?RB
                 // ?RC
                 return;
-            
+
         }
     }//GEN-LAST:event_cardGradeCoBActionPerformed
 
     private void numColorsCoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numColorsCoBActionPerformed
         JComboBox cb = (JComboBox) evt.getSource();
-        
-        switch(cb.getSelectedItem().toString()){
+
+        switch (cb.getSelectedItem().toString()) {
             case "No colour":
                 // 1 ..3 Cg
                 // !RB
@@ -332,7 +341,7 @@ public class MainFrame extends javax.swing.JFrame {
                 // !RC
                 setLockChB(reinforcedCornersChB, false);
                 return;
-                    
+
             case "1 Colour":
                 // 2 .. 4 Cg
                 // !RB
@@ -350,13 +359,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void reinforcedBottomChBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinforcedBottomChBActionPerformed
         JCheckBox chB = (JCheckBox) evt.getSource();
-        if (chB.getSelectedObjects() == null){
+        if (chB.getSelectedObjects() == null) {
             // 1 .. 5 cg
             // 2 cp
             // !RC
             setLockChB(reinforcedCornersChB, false);
-        }
-        else{
+        } else {
             // 2 .. 5 cg
             // 2 cp
             // ?RC
@@ -365,12 +373,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void reinforcedCornersChBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinforcedCornersChBActionPerformed
         JCheckBox chB = (JCheckBox) evt.getSource();
-        if (chB.getSelectedObjects() == null){
+        if (chB.getSelectedObjects() == null) {
             // 1 .. 5 cg
             // 0 .. 2 cp
             // ?RB
-        }
-        else{
+        } else {
             // 3 .. 5 cg
             //  cp
             // RB
@@ -379,26 +386,25 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_reinforcedCornersChBActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="gui element mutators">
-    private void setLockChB( JCheckBox chB, boolean state){
+    private void setLockChB(JCheckBox chB, boolean state) {
         chB.setEnabled(false);
         chB.setSelected(state);
     }
-    
-    private void filterLists(JComboBox coB, Object[] validOptions){
+
+    private void filterLists(JComboBox coB, Object[] validOptions) {
         ComboBoxModel cbm = coB.getModel();
         System.out.println(cbm.toString());
     }
     //</editor-fold>
-    
+
     /**
      * @param args the command line arguments
      */
-            
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

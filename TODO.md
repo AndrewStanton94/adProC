@@ -1,7 +1,7 @@
-Create BoxDescriptor objects
-Test input validation
-Box creation system
-Create Add button
+x Create BoxDescriptor objects
+- Test input validation
+- Box creation system
+- Create Add button
 
 Create reset button
 

@@ -45,18 +45,34 @@ public class BoxDescriptor {
     }
     
     public boolean matchCardGrade(int cardGrade){
-        return cardGrade >= getMinCardGrade() && cardGrade <= getMaxCardGrade();
+        boolean ans = cardGrade >= getMinCardGrade() && cardGrade <= getMaxCardGrade();
+        System.out.println("Card grade: " + cardGrade + " -> " + ans);
+        return ans;
     }
     
     public boolean matchColour(int noOfColors){
-        return noOfColors == getNoOfColors();
+        boolean ans = noOfColors == getNoOfColors();
+        System.out.println("match colour: " + noOfColors + " -> " + ans);
+        return ans;
     }
     
     public boolean matchReinforcedBottom(boolean reinforcedBottom){
-        return reinforcedBottom == hasReinforcedBottom();
+        boolean ans = reinforcedBottom == hasReinforcedBottom();
+        System.out.println("match btm: " + reinforcedBottom + " -> " + ans);
+        return ans;
     }
     
     public boolean matchReinforcedCorners(boolean reinforcedCorners){
-        return reinforcedCorners == hasReinforcedCorners();
+        boolean ans = reinforcedCorners == hasReinforcedCorners();
+        System.out.println("match cnr: " + reinforcedCorners + " -> " + ans);
+        return ans;
+    }
+    
+    public boolean match(int cardGrade, int colour, boolean btm, boolean cnr){
+        System.out.println("In match");
+        return matchCardGrade(cardGrade) &&
+                matchColour(colour) &&
+                matchReinforcedBottom(btm) &&
+                matchReinforcedCorners(cnr);
     }
 }

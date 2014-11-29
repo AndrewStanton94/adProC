@@ -5,49 +5,50 @@ package cwk;
  * @author Andrew
  */
 public abstract class Box {
-    public final static double PRICECONSTANT = 0.5;
 
+    public final static double PRICECONSTANT = 0.5;
     public final static BoxDescriptor boxDesc = null; //new BoxDescriptor(0, 0, 0, false, false);
-    
+
     double width, depth, height = 0;
     boolean reinforcedCorners, reinforcedBottom, sealedTop = false;
     int cardGrade, numberOfColors = 0, qty = 1;
 
     public Box(double width, double depth, double height,
-            boolean reinforcedCorners, boolean reinforcedBottom, boolean sealedTop,
-            int cardGrade, int numberOfColors, int qty){
-                this.width  = width;
-                this.depth  = depth;
-                this.height = height;
-                
-                this.reinforcedCorners = reinforcedCorners;
-                this.reinforcedBottom  = reinforcedBottom;
-                
-                this.cardGrade      = cardGrade;
-                this.numberOfColors = numberOfColors;
-                this.qty            = qty;
+            boolean reinforcedBottom, boolean reinforcedCorners, boolean sealedTop,
+            int cardGrade, int numberOfColors, int qty) {
+        this.width = width;
+        this.depth = depth;
+        this.height = height;
+
+        this.reinforcedCorners = reinforcedCorners;
+        this.reinforcedBottom = reinforcedBottom;
+
+        this.cardGrade = cardGrade;
+        this.numberOfColors = numberOfColors;
+        this.qty = qty;
     }
-    
+
     public double getSurfaceArea() {
         return 2 * (width * depth + width * height + height * depth);
     }
-    
-    public double getPrice(){
+
+    public double getPrice() {
         double baseCost = getSurfaceArea() * PRICECONSTANT;
         double fullCost = baseCost;
-        
-        if (getNumberOfColors() > 1){
-            if (getNumberOfColors() == 2)
+
+        if (getNumberOfColors() > 1) {
+            if (getNumberOfColors() == 2) {
                 fullCost += baseCost * 0.15;
-            else
+            } else {
                 fullCost += baseCost * 0.12;
+            }
         }
-        
-        fullCost += hasReinforcedBottom()  ? baseCost * 0.12 : 0;
+
+        fullCost += hasReinforcedBottom() ? baseCost * 0.12 : 0;
         fullCost += hasReinforcedCorners() ? baseCost * 0.08 : 0;
-        
+
         fullCost += hasSealedTop() ? baseCost * 0.06 : 0;
-        
+
         return fullCost * getQty();
     }
 
@@ -55,7 +56,11 @@ public abstract class Box {
     public double getPRICECONSTANT() {
         return PRICECONSTANT;
     }
-    
+
+    public static BoxDescriptor getDescription() {
+        return boxDesc;
+    }
+
     //<editor-fold desc="type: double">
     public double getWidth() {
         return width;
@@ -69,7 +74,7 @@ public abstract class Box {
         return height;
     }
     //</editor-fold>
-    
+
     //<editor-fold desc="type: bool">
     public boolean hasReinforcedCorners() {
         return reinforcedCorners;
@@ -88,7 +93,7 @@ public abstract class Box {
     public int getCardGrade() {
         return cardGrade;
     }
-    
+
     public int getNumberOfColors() {
         return numberOfColors;
     }
@@ -97,7 +102,7 @@ public abstract class Box {
         return qty;
     }
     //</editor-fold>
-    // /Accessors </editor-fold>  
+    // /Accessors </editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Mutators">
     //<editor-fold desc="type: double">
@@ -136,7 +141,7 @@ public abstract class Box {
     public void setNumberOfColors(int numberOfColors) {
         this.numberOfColors = numberOfColors;
     }
-    
+
     public void setQty(int qty) {
         this.qty = qty;
     }
