@@ -5,18 +5,35 @@ package cwk;
  * @author Andrew
  */
 public abstract class Box {
-    final double PRICECONSTANT = 0.5;
+    public final static double PRICECONSTANT = 0.5;
+
+    public final static BoxDescriptor boxDesc = null; //new BoxDescriptor(0, 0, 0, false, false);
     
     double width, depth, height = 0;
     boolean reinforcedCorners, reinforcedBottom, sealedTop = false;
     int cardGrade, numberOfColors = 0, qty = 1;
 
-    public double getArea() {
-        return width * depth * height;
+    public Box(double width, double depth, double height,
+            boolean reinforcedCorners, boolean reinforcedBottom, boolean sealedTop,
+            int cardGrade, int numberOfColors, int qty){
+                this.width  = width;
+                this.depth  = depth;
+                this.height = height;
+                
+                this.reinforcedCorners = reinforcedCorners;
+                this.reinforcedBottom  = reinforcedBottom;
+                
+                this.cardGrade      = cardGrade;
+                this.numberOfColors = numberOfColors;
+                this.qty            = qty;
+    }
+    
+    public double getSurfaceArea() {
+        return 2 * (width * depth + width * height + height * depth);
     }
     
     public double getPrice(){
-        double baseCost = getArea() * PRICECONSTANT;
+        double baseCost = getSurfaceArea() * PRICECONSTANT;
         double fullCost = baseCost;
         
         if (getNumberOfColors() > 1){

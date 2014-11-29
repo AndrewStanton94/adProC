@@ -23,7 +23,7 @@ public class BoxDescriptor {
         this.reinforcedBottom  = reinforcedBottom;
         this.reinforcedCorners = reinforcedCorners;
     }
-    
+      
     public int getMinCardGrade(){
         return minCardGrade;
     }
@@ -57,6 +57,6 @@ public class BoxDescriptor {
     }
     
     public boolean matchReinforcedCorners(boolean reinforcedCorners){
-        return reinforcedBottom == hasReinforcedCorners();
+        return reinforcedCorners == hasReinforcedCorners();
     }
 }
