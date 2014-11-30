@@ -19,7 +19,7 @@ public class BoxMaker {
 
     BoxDescriptor[] boxDescs = {BoxType1.getDescription(),
         BoxType2.getDescription(), 
-        //BoxType3.getDescription(),
+        BoxType3.getDescription(),
         BoxType4.getDescription(), BoxType5.getDescription()};
 
     public BoxMaker(
@@ -54,5 +54,22 @@ public class BoxMaker {
         }
         System.err.println("Does not match");
         return -1;
+    }
+    
+    public Box createBox(){
+        switch (getType()){
+            case 1:
+                return new BoxType1(width, depth, height, sealedTop, cardGrade, qty);
+            case 2:
+                return new BoxType2(width, depth, height, sealedTop, cardGrade, qty);
+            case 3:
+                return new BoxType3(width, depth, height, sealedTop, cardGrade, qty);
+            case 4:
+                return new BoxType4(width, depth, height, reinforcedCorners, reinforcedBottom, sealedTop, cardGrade, numberOfColors, qty);
+            case 5:
+                return new BoxType5(width, depth, height, reinforcedCorners, reinforcedBottom, sealedTop, cardGrade, numberOfColors, qty);
+            default:
+                return null;
+        }
     }
 }

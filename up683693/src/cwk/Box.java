@@ -53,10 +53,6 @@ public abstract class Box {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Accessors">
-    public double getPRICECONSTANT() {
-        return PRICECONSTANT;
-    }
-
     public static BoxDescriptor getDescription() {
         return boxDesc;
     }

@@ -1,13 +1,13 @@
 x Create BoxDescriptor objects
 - Test input validation
-- Box creation system
-- Create Add button
+x Box creation system
+x Create Add button
 
 Create reset button
 
-Set up Box storage
+x Set up Box storage
     ArrayList
-        Write to
+    x   Write to
         Read from
         Update
         Delete
