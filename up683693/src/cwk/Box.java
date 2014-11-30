@@ -13,7 +13,8 @@ public abstract class Box {
     int cardGrade, numberOfColors = 0, qty = 1;
 
     public Box(double width, double depth, double height,
-            boolean reinforcedBottom, boolean reinforcedCorners, boolean sealedTop,
+            boolean reinforcedBottom, boolean reinforcedCorners,
+            boolean sealedTop,
             int cardGrade, int numberOfColors, int qty) {
         this.width = width;
         this.depth = depth;

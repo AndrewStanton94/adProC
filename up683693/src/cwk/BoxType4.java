@@ -12,7 +12,10 @@ package cwk;
 public class BoxType4 extends Box{
     public final static BoxDescriptor boxDesc = new BoxDescriptor(2, 5, 2, true, false);
 
-    public BoxType4(double width, double depth, double height, boolean reinforcedCorners, boolean reinforcedBottom, boolean sealedTop, int cardGrade, int numberOfColors, int qty) {
+    public BoxType4(double width, double depth, double height, 
+            boolean reinforcedBottom, boolean reinforcedCorners,
+            boolean sealedTop,
+            int cardGrade, int numberOfColors, int qty) {
         super(width, depth, height, true, false, sealedTop, cardGrade, 2, qty);
     }
     

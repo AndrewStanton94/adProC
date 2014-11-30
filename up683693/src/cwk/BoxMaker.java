@@ -37,11 +37,6 @@ public class BoxMaker {
         this.cardGrade = cardGrade;
         this.numberOfColors = numberOfColors;
         this.qty = qty;
-
-        matchableArgs[0] = cardGrade;
-        matchableArgs[1] = numberOfColors;
-        matchableArgs[2] = reinforcedBottom;
-        matchableArgs[3] = reinforcedCorners;
     }
 
     public int getType() {
@@ -65,9 +60,9 @@ public class BoxMaker {
             case 3:
                 return new BoxType3(width, depth, height, sealedTop, cardGrade, qty);
             case 4:
-                return new BoxType4(width, depth, height, reinforcedCorners, reinforcedBottom, sealedTop, cardGrade, numberOfColors, qty);
+                return new BoxType4(width, depth, height, reinforcedBottom, reinforcedCorners, sealedTop, cardGrade, numberOfColors, qty);
             case 5:
-                return new BoxType5(width, depth, height, reinforcedCorners, reinforcedBottom, sealedTop, cardGrade, numberOfColors, qty);
+                return new BoxType5(width, depth, height, reinforcedBottom, reinforcedCorners, sealedTop, cardGrade, numberOfColors, qty);
             default:
                 return null;
         }

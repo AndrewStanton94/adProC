@@ -121,11 +121,6 @@ public class MainFrame extends javax.swing.JFrame {
         boxHeightTB.setInputVerifier(dv);
 
         cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
-        cardGradeCoB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardGradeCoBActionPerformed(evt);
-            }
-        });
 
         jLabel2.setLabelFor(cardGradeCoB);
         jLabel2.setText("Card Grade");
@@ -133,25 +128,10 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3.setText("Colours");
 
         numColorsCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No colours", "1 Colour", "2 Colours" }));
-        numColorsCoB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numColorsCoBActionPerformed(evt);
-            }
-        });
 
         reinforcedBottomChB.setText("Reinforced Bottom");
-        reinforcedBottomChB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reinforcedBottomChBActionPerformed(evt);
-            }
-        });
 
         reinforcedCornersChB.setText("Reinforced Corners");
-        reinforcedCornersChB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reinforcedCornersChBActionPerformed(evt);
-            }
-        });
 
         sealableTopChB.setText("Sealable Top");
 
@@ -280,6 +260,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addToOrderBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderBTNActionPerformed
+        try{
         BoxMaker bm = new BoxMaker(Double.parseDouble(boxWidthTB.getText()),
                 Double.parseDouble(boxWidthTB.getText()),
                 Double.parseDouble(boxHeightTB.getText()),
@@ -288,113 +269,32 @@ public class MainFrame extends javax.swing.JFrame {
                 sealableTopChB.getSelectedObjects() != null,
                 cardGradeCoB.getSelectedIndex(), numColorsCoB.getSelectedIndex(),
                 (int) qtySpn.getValue());
-        Box box = bm.createBox();
-        order.add(box);
+        order.add(bm.createBox());
         boxList.setListData(order.getBoxes());
         costLbl.setText(order.getTotalCostStr());
+        }
+        catch (NumberFormatException nfe){
+//            System.err.println(nfe);
+            validateInputs();
+        }
     }//GEN-LAST:event_addToOrderBTNActionPerformed
 
+    private void validateInputs(){
+        DimensionVarifier dv = (DimensionVarifier) boxWidthTB.getInputVerifier();
+        
+        // Reverse order so will move to leftmost error first. 
+        if (!dv.verify(boxWidthTB))
+            boxWidthTB.requestFocusInWindow();
+        if (!dv.verify(boxDepthTB))
+            boxDepthTB.requestFocusInWindow();
+        if (!dv.verify(boxHeightTB))
+            boxHeightTB.requestFocusInWindow();
+        
+    }
+    
     private void boxListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_boxListValueChanged
         System.out.println("pass");
     }//GEN-LAST:event_boxListValueChanged
-
-    private void cardGradeCoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardGradeCoBActionPerformed
-        JComboBox cb = (JComboBox) evt.getSource();
-
-        switch (cb.getSelectedItem().toString()) {
-            case "Card Grade":
-                // Pass
-                return;
-            case "Grade 1":
-                // 0 CP
-                // !RB
-                setLockChB(reinforcedBottomChB, false);
-                // !RC
-                setLockChB(reinforcedCornersChB, false);
-                return;
-
-            case "Grade 2":
-                // 0 .. 2 CP
-                // ?RB
-                // !RC
-                setLockChB(reinforcedCornersChB, false);
-                return;
-
-            case "Grade 3":
-                // 0 .. 2 CP
-                // ?RB
-                // ?RC
-                return;
-
-            case "Grade 4":
-                // 1 .. 2 CP
-                // ?RB
-                // ?RC
-                return;
-
-            case "Grade 5":
-                // 2 CP
-                // ?RB
-                // ?RC
-                return;
-
-        }
-    }//GEN-LAST:event_cardGradeCoBActionPerformed
-
-    private void numColorsCoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numColorsCoBActionPerformed
-        JComboBox cb = (JComboBox) evt.getSource();
-
-        switch (cb.getSelectedItem().toString()) {
-            case "No colour":
-                // 1 ..3 Cg
-                // !RB
-                setLockChB(reinforcedBottomChB, false);
-                // !RC
-                setLockChB(reinforcedCornersChB, false);
-                return;
-
-            case "1 Colour":
-                // 2 .. 4 Cg
-                // !RB
-                setLockChB(reinforcedBottomChB, false);
-                // !RC
-                setLockChB(reinforcedCornersChB, false);
-                return;
-            case "2 Colours":
-                // 2 .. 5 Cg
-                // ?RB
-                // ?RC
-                return;
-        }
-    }//GEN-LAST:event_numColorsCoBActionPerformed
-
-    private void reinforcedBottomChBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinforcedBottomChBActionPerformed
-        JCheckBox chB = (JCheckBox) evt.getSource();
-        if (chB.getSelectedObjects() == null) {
-            // 1 .. 5 cg
-            // 2 cp
-            // !RC
-            setLockChB(reinforcedCornersChB, false);
-        } else {
-            // 2 .. 5 cg
-            // 2 cp
-            // ?RC
-        }
-    }//GEN-LAST:event_reinforcedBottomChBActionPerformed
-
-    private void reinforcedCornersChBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinforcedCornersChBActionPerformed
-        JCheckBox chB = (JCheckBox) evt.getSource();
-        if (chB.getSelectedObjects() == null) {
-            // 1 .. 5 cg
-            // 0 .. 2 cp
-            // ?RB
-        } else {
-            // 3 .. 5 cg
-            //  cp
-            // RB
-            setLockChB(reinforcedBottomChB, true);
-        }
-    }//GEN-LAST:event_reinforcedCornersChBActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="gui element mutators">
     private void setLockChB(JCheckBox chB, boolean state) {
