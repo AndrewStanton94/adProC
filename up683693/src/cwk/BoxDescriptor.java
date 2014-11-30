@@ -69,7 +69,6 @@ public class BoxDescriptor {
     }
     
     public boolean match(int cardGrade, int colour, boolean btm, boolean cnr){
-        System.out.println("In match");
         return matchCardGrade(cardGrade) &&
                 matchColour(colour) &&
                 matchReinforcedBottom(btm) &&

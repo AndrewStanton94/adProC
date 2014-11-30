@@ -10,7 +10,6 @@ package cwk;
  * @author Andrew
  */
 public class BoxType4 extends Box{
-    public final static double PRICECONSTANT = 0.92;
     public final static BoxDescriptor boxDesc = new BoxDescriptor(2, 5, 2, true, false);
 
     public BoxType4(double width, double depth, double height, boolean reinforcedCorners, boolean reinforcedBottom, boolean sealedTop, int cardGrade, int numberOfColors, int qty) {

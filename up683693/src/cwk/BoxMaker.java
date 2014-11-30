@@ -38,8 +38,7 @@ public class BoxMaker {
         this.numberOfColors = numberOfColors;
         this.qty = qty;
 
-        matchableArgs[0] = this.cardGrade;
-        // System.out.println(this.cardGrade);
+        matchableArgs[0] = cardGrade;
         matchableArgs[1] = numberOfColors;
         matchableArgs[2] = reinforcedBottom;
         matchableArgs[3] = reinforcedCorners;
@@ -53,6 +52,7 @@ public class BoxMaker {
                 return i + 1;
             }
         }
+        System.err.println("Does not match");
         return -1;
     }
 }

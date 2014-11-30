@@ -6,8 +6,7 @@ package cwk;
  */
 public abstract class Box {
 
-    public final static double PRICECONSTANT = 0.5;
-    public final static BoxDescriptor boxDesc = null; //new BoxDescriptor(0, 0, 0, false, false);
+    public final static BoxDescriptor boxDesc = null;
 
     double width, depth, height = 0;
     boolean reinforcedCorners, reinforcedBottom, sealedTop = false;
@@ -33,7 +32,8 @@ public abstract class Box {
     }
 
     public double getPrice() {
-        double baseCost = getSurfaceArea() * PRICECONSTANT;
+        double[] costFactors = {0, 0.5, 0.59, 0.7, 0.92, 1.35}; // 0 as placeholder
+        double baseCost = getSurfaceArea() * costFactors[cardGrade];
         double fullCost = baseCost;
 
         if (getNumberOfColors() > 1) {
