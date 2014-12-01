@@ -3,7 +3,7 @@ x Create BoxDescriptor objects
 x Box creation system
 x Create Add button
 
-Create reset button
+x Create reset button
 Reapply filters to looseFocus event
 
 x Set up Box storage
