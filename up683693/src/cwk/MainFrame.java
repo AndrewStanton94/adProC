@@ -50,6 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
         reinforcedBottomChB = new javax.swing.JCheckBox();
         reinforcedCornersChB = new javax.swing.JCheckBox();
         sealableTopChB = new javax.swing.JCheckBox();
+        resetBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         addToOrderBTN = new javax.swing.JButton();
@@ -135,6 +136,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         sealableTopChB.setText("Sealable Top");
 
+        resetBtn.setText("Reset");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,7 +166,10 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(reinforcedCornersChB)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(sealableTopChB))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(sealableTopChB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(resetBtn)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,8 +190,10 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(reinforcedBottomChB)
                     .addComponent(reinforcedCornersChB))
                 .addGap(18, 18, 18)
-                .addComponent(sealableTopChB)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sealableTopChB)
+                    .addComponent(resetBtn))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -296,6 +309,21 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println("pass");
     }//GEN-LAST:event_boxListValueChanged
 
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        boxWidthTB.setText("Width");
+        boxDepthTB.setText("Depth");
+        boxHeightTB.setText("Height");
+        
+        cardGradeCoB.setSelectedIndex(0);
+        numColorsCoB.setSelectedIndex(0);
+        
+        reinforcedBottomChB.setSelected(false);
+        reinforcedCornersChB.setSelected(false);
+        sealableTopChB.setSelected(false);
+        
+        qtySpn.setValue(0);
+    }//GEN-LAST:event_resetBtnActionPerformed
+
     //<editor-fold defaultstate="collapsed" desc="gui element mutators">
     private void setLockChB(JCheckBox chB, boolean state) {
         chB.setEnabled(false);
@@ -364,6 +392,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JSpinner qtySpn;
     private javax.swing.JCheckBox reinforcedBottomChB;
     private javax.swing.JCheckBox reinforcedCornersChB;
+    private javax.swing.JButton resetBtn;
     private javax.swing.JCheckBox sealableTopChB;
     // End of variables declaration//GEN-END:variables
 }
