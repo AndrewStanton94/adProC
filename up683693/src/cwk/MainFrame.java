@@ -122,6 +122,11 @@ public class MainFrame extends javax.swing.JFrame {
         boxHeightTB.setInputVerifier(dv);
 
         cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
+        cardGradeCoB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cardGradeCoBFocusLost(evt);
+            }
+        });
 
         jLabel2.setLabelFor(cardGradeCoB);
         jLabel2.setText("Card Grade");
@@ -129,6 +134,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3.setText("Colours");
 
         numColorsCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No colours", "1 Colour", "2 Colours" }));
+        numColorsCoB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                numColorsCoBFocusLost(evt);
+            }
+        });
 
         reinforcedBottomChB.setText("Reinforced Bottom");
 
@@ -270,31 +280,32 @@ public class MainFrame extends javax.swing.JFrame {
         boxList.setListData(list);
         System.out.println(boxList.getModel().toString());
         System.out.println(boxList.getModel().getClass());
+        
+        filterLists(cardGradeCoB, null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addToOrderBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderBTNActionPerformed
-        try{
-        BoxMaker bm = new BoxMaker(Double.parseDouble(boxWidthTB.getText()),
-                Double.parseDouble(boxWidthTB.getText()),
-                Double.parseDouble(boxHeightTB.getText()),
-                reinforcedBottomChB.getSelectedObjects() != null,
-                reinforcedCornersChB.getSelectedObjects() != null,
-                sealableTopChB.getSelectedObjects() != null,
-                cardGradeCoB.getSelectedIndex(), numColorsCoB.getSelectedIndex(),
-                (int) qtySpn.getValue());
-        order.add(bm.createBox());
-        boxList.setListData(order.getBoxes());
-        costLbl.setText(order.getTotalCostStr());
-        }
-        catch (NumberFormatException nfe){
+        try {
+            BoxMaker bm = new BoxMaker(Double.parseDouble(boxWidthTB.getText()),
+                    Double.parseDouble(boxWidthTB.getText()),
+                    Double.parseDouble(boxHeightTB.getText()),
+                    reinforcedBottomChB.getSelectedObjects() != null,
+                    reinforcedCornersChB.getSelectedObjects() != null,
+                    sealableTopChB.getSelectedObjects() != null,
+                    cardGradeCoB.getSelectedIndex(), numColorsCoB.getSelectedIndex(),
+                    (int) qtySpn.getValue());
+            order.add(bm.createBox());
+            boxList.setListData(order.getBoxes());
+            costLbl.setText(order.getTotalCostStr());
+        } catch (NumberFormatException nfe) {
 //            System.err.println(nfe);
             validateInputs();
         }
     }//GEN-LAST:event_addToOrderBTNActionPerformed
 
-    private void validateInputs(){
+    private void validateInputs() {
         DimensionVarifier dv = (DimensionVarifier) boxWidthTB.getInputVerifier();
-        
+
         // Reverse order so will move to leftmost error first. 
         if (!dv.verify(boxWidthTB))
             boxWidthTB.requestFocusInWindow();
@@ -302,9 +313,9 @@ public class MainFrame extends javax.swing.JFrame {
             boxDepthTB.requestFocusInWindow();
         if (!dv.verify(boxHeightTB))
             boxHeightTB.requestFocusInWindow();
-        
+
     }
-    
+
     private void boxListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_boxListValueChanged
         System.out.println("pass");
     }//GEN-LAST:event_boxListValueChanged
@@ -313,16 +324,77 @@ public class MainFrame extends javax.swing.JFrame {
         boxWidthTB.setText("Width");
         boxDepthTB.setText("Depth");
         boxHeightTB.setText("Height");
-        
+
         cardGradeCoB.setSelectedIndex(0);
         numColorsCoB.setSelectedIndex(0);
-        
+
         reinforcedBottomChB.setSelected(false);
         reinforcedCornersChB.setSelected(false);
         sealableTopChB.setSelected(false);
-        
+
         qtySpn.setValue(0);
     }//GEN-LAST:event_resetBtnActionPerformed
+
+    private void cardGradeCoBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cardGradeCoBFocusLost
+        JComboBox cb = (JComboBox) evt.getSource();
+
+        switch (cb.getSelectedItem().toString()) {
+            case "Card Grade":
+            // Pass
+            return;
+            case "Grade 1":
+            // 0 CP
+            // !RB
+            setLockChB(reinforcedBottomChB, false);
+            // !RC
+            setLockChB(reinforcedCornersChB, false);
+            return;
+
+            case "Grade 2":
+            // 0 .. 2 CP
+            // !RC
+            setLockChB(reinforcedCornersChB, false);
+            return;
+
+            case "Grade 3":
+            // 0 .. 2 CP
+            return;
+
+            case "Grade 4":
+            // 1 .. 2 CP
+            return;
+
+            case "Grade 5":
+            // 2 CP
+            return;
+        }
+    }//GEN-LAST:event_cardGradeCoBFocusLost
+
+    private void numColorsCoBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_numColorsCoBFocusLost
+        JComboBox cb = (JComboBox) evt.getSource();
+
+        switch (cb.getSelectedItem().toString()) {
+            case "No colour":
+            // 1 ..3 Cg
+            // !RB
+            setLockChB(reinforcedBottomChB, false);
+            // !RC
+            setLockChB(reinforcedCornersChB, false);
+            return;
+
+            case "1 Colour":
+            // 2 .. 4 Cg
+            // !RB
+            setLockChB(reinforcedBottomChB, false);
+            // !RC
+            setLockChB(reinforcedCornersChB, false);
+            return;
+
+            case "2 Colours":
+            // 2 .. 5 Cg
+            return;
+        }
+    }//GEN-LAST:event_numColorsCoBFocusLost
 
     //<editor-fold defaultstate="collapsed" desc="gui element mutators">
     private void setLockChB(JCheckBox chB, boolean state) {
@@ -330,8 +402,9 @@ public class MainFrame extends javax.swing.JFrame {
         chB.setSelected(state);
     }
 
-    private void filterLists(JComboBox coB, Object[] validOptions) {
+    private void filterLists(JComboBox coB, Object[] invalidOptions) {
         ComboBoxModel cbm = coB.getModel();
+        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
         System.out.println(cbm.toString());
     }
     //</editor-fold>
@@ -346,12 +419,11 @@ public class MainFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-            }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
