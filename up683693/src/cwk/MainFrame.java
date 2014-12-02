@@ -6,6 +6,7 @@
 package cwk;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
@@ -402,11 +403,23 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void filterLists(JComboBox coB, Object[] invalidOptions) {
-        hjhhj
-        ComboBoxModel cbm = coB.getModel();
-        ArrayList<String> ar = new ArrayList();
-        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
-        System.out.println(cbm.toString());
+        ArrayList<String> allOptions = new ArrayList();
+        if (coB.getName().equals("cardGradeCoB")){
+//            allOptions = { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" };
+        }
+        else {
+//            allOptions = {"No colours", "1 Colour", "2 Colours"};
+        }
+        
+//        ComboBoxModel cbm = coB.getModel();        
+//        ArrayList<String> ar = new ArrayList( Arrays.asList(allOptions));
+        //cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(ar ));
+//        System.out.println(cbm.toString());
+        
+        for (Object ob : invalidOptions){
+            allOptions.remove((String) ob);
+        }
+        coB.setModel(new DefaultComboBoxModel(allOptions.toArray()));
     }
     //</editor-fold>
 
