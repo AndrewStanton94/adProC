@@ -5,8 +5,7 @@
  */
 package cwk;
 
-// import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
+import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
@@ -403,7 +402,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void filterLists(JComboBox coB, Object[] invalidOptions) {
+        hjhhj
         ComboBoxModel cbm = coB.getModel();
+        ArrayList<String> ar = new ArrayList();
         cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
         System.out.println(cbm.toString());
     }
