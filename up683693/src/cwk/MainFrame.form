@@ -318,11 +318,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Reinforced Bottom"/>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="reinforcedBottomChBFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="reinforcedCornersChB">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reinforced Corners"/>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="reinforcedCornersChBFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="sealableTopChB">
           <Properties>

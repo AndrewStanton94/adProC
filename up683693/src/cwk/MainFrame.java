@@ -6,6 +6,7 @@
 package cwk;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -141,8 +142,18 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         reinforcedBottomChB.setText("Reinforced Bottom");
+        reinforcedBottomChB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                reinforcedBottomChBFocusLost(evt);
+            }
+        });
 
         reinforcedCornersChB.setText("Reinforced Corners");
+        reinforcedCornersChB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                reinforcedCornersChBFocusLost(evt);
+            }
+        });
 
         sealableTopChB.setText("Sealable Top");
 
@@ -280,8 +291,6 @@ public class MainFrame extends javax.swing.JFrame {
         boxList.setListData(list);
         System.out.println(boxList.getModel().toString());
         System.out.println(boxList.getModel().getClass());
-        
-        filterLists(cardGradeCoB, null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addToOrderBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderBTNActionPerformed
@@ -306,6 +315,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void validateInputs() {
         DimensionVarifier dv = (DimensionVarifier) boxWidthTB.getInputVerifier();
 
+        // User should be contained in text box if they submit invalid data
+        // This method protects against user not going into the textboxes
         // Reverse order so will move to leftmost error first. 
         if (!dv.verify(boxWidthTB))
             boxWidthTB.requestFocusInWindow();
@@ -326,10 +337,14 @@ public class MainFrame extends javax.swing.JFrame {
         boxHeightTB.setText("Height");
 
         cardGradeCoB.setSelectedIndex(0);
+        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5"}));
         numColorsCoB.setSelectedIndex(0);
+        numColorsCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"No colours", "1 Colour", "2 Colours"}));
 
         reinforcedBottomChB.setSelected(false);
+        reinforcedBottomChB.setEnabled(true);
         reinforcedCornersChB.setSelected(false);
+        reinforcedCornersChB.setEnabled(true);
         sealableTopChB.setSelected(false);
 
         qtySpn.setValue(0);
@@ -340,33 +355,34 @@ public class MainFrame extends javax.swing.JFrame {
 
         switch (cb.getSelectedItem().toString()) {
             case "Card Grade":
-            // Pass
-            return;
+                // Pass
+                return;
             case "Grade 1":
-            // 0 CP
-            // !RB
-            setLockChB(reinforcedBottomChB, false);
-            // !RC
-            setLockChB(reinforcedCornersChB, false);
-            return;
+                // 0 CP
+                filterLists(numColorsCoB, false, new Object[]{"1 Colour", "2 Colours"});
+                // !RB
+                setLockChB(reinforcedBottomChB, false);
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
 
             case "Grade 2":
-            // 0 .. 2 CP
-            // !RC
-            setLockChB(reinforcedCornersChB, false);
-            return;
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
 
             case "Grade 3":
-            // 0 .. 2 CP
-            return;
+                return;
 
             case "Grade 4":
-            // 1 .. 2 CP
-            return;
+                // 1 .. 2 CP
+                filterLists(numColorsCoB, false, new Object[]{"No colours"});
+                return;
 
             case "Grade 5":
-            // 2 CP
-            return;
+                // 2 CP
+                filterLists(numColorsCoB, false, new Object[]{"No colours", "1 Colour"});
+                return;
         }
     }//GEN-LAST:event_cardGradeCoBFocusLost
 
@@ -375,26 +391,54 @@ public class MainFrame extends javax.swing.JFrame {
 
         switch (cb.getSelectedItem().toString()) {
             case "No colour":
-            // 1 ..3 Cg
-            // !RB
-            setLockChB(reinforcedBottomChB, false);
-            // !RC
-            setLockChB(reinforcedCornersChB, false);
-            return;
+                // 1 ..3 Cg
+                // !RB
+                setLockChB(reinforcedBottomChB, false);
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
 
             case "1 Colour":
-            // 2 .. 4 Cg
-            // !RB
-            setLockChB(reinforcedBottomChB, false);
-            // !RC
-            setLockChB(reinforcedCornersChB, false);
-            return;
+                // 2 .. 4 Cg
+                // !RB
+                setLockChB(reinforcedBottomChB, false);
+                // !RC
+                setLockChB(reinforcedCornersChB, false);
+                return;
 
             case "2 Colours":
-            // 2 .. 5 Cg
-            return;
+                // 2 .. 5 Cg
+                return;
         }
     }//GEN-LAST:event_numColorsCoBFocusLost
+
+    private void reinforcedBottomChBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reinforcedBottomChBFocusLost
+        JCheckBox chB = (JCheckBox) evt.getSource();
+        if (chB.getSelectedObjects() == null){
+            // 2 cp
+            filterLists(numColorsCoB, false, new Object[]{"No colours", "1 Colour"});
+            // !RC
+            setLockChB(reinforcedCornersChB, false);
+        }
+        else {
+            // 2 .. 5 cg
+            // 2 cp
+            filterLists(numColorsCoB, false, new Object[]{"No colours", "1 Colour"});
+        }
+    }//GEN-LAST:event_reinforcedBottomChBFocusLost
+
+    private void reinforcedCornersChBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reinforcedCornersChBFocusLost
+        JCheckBox chB = (JCheckBox) evt.getSource();
+        if (chB.getSelectedObjects() == null) {
+        }
+        else{
+            // 3 .. 5 cg
+            //  2 cp
+            filterLists(numColorsCoB, false, new Object[]{"No colours", "1 Colour"});
+            // RB
+            setLockChB(reinforcedBottomChB, true);
+        }
+    }//GEN-LAST:event_reinforcedCornersChBFocusLost
 
     //<editor-fold defaultstate="collapsed" desc="gui element mutators">
     private void setLockChB(JCheckBox chB, boolean state) {
@@ -402,23 +446,21 @@ public class MainFrame extends javax.swing.JFrame {
         chB.setSelected(state);
     }
 
-    private void filterLists(JComboBox coB, Object[] invalidOptions) {
-        ArrayList<String> allOptions = new ArrayList();
-        if (coB.getName().equals("cardGradeCoB")){
-//            allOptions = { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" };
+    private void filterLists(JComboBox coB, boolean isCardGrade, Object[] invalidOptions) {
+        ArrayList<String> allOptions = new ArrayList(); // Store all values for gui element
+
+        System.err.println(coB);
+
+        if (isCardGrade) {
+            String[] cardOptions = {"Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5"};
+            allOptions.addAll(Arrays.asList(cardOptions));
+        } else {
+            String[] colourOptions = {"No colours", "1 Colour", "2 Colours"};
+            allOptions.addAll(Arrays.asList(colourOptions));
         }
-        else {
-//            allOptions = {"No colours", "1 Colour", "2 Colours"};
-        }
-        
-//        ComboBoxModel cbm = coB.getModel();        
-//        ArrayList<String> ar = new ArrayList( Arrays.asList(allOptions));
-        //cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(ar ));
-//        System.out.println(cbm.toString());
-        
-        for (Object ob : invalidOptions){
+
+        for (Object ob : invalidOptions)
             allOptions.remove((String) ob);
-        }
         coB.setModel(new DefaultComboBoxModel(allOptions.toArray()));
     }
     //</editor-fold>
