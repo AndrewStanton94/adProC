@@ -20,10 +20,15 @@ public class BoxType5 extends Box{
     
     public double getPrice() {
         double baseCost = getBasePrice();
+        System.err.println("Basic price " + getBasePrice());
+        System.err.println("2 colurs " + getBasePrice() * 0.15);
+        System.err.println("rb " + getBasePrice() * 0.12);
+        System.err.println("rc " + getBasePrice() * 0.08);
+        System.err.println("st? " + (hasSealedTop() ? baseCost * 0.06 : 0));
         double additionalCosts = baseCost * 0.15;   // 2 colours
         additionalCosts += baseCost * 0.12;         // Reinforced bottom
         additionalCosts += baseCost * 0.08;         // Reinforced corners
-        additionalCosts += hasSealedTop() ? baseCost * 0.06 : 0;
+        additionalCosts += (sealedTop? baseCost * 0.06 : 0);
         return getBasePrice() + additionalCosts;
     }
 }

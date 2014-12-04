@@ -32,7 +32,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         boxList = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         dimensionPanel = new javax.swing.JPanel();
         boxWidthTB = new javax.swing.JTextField();
@@ -52,24 +51,13 @@ public class MainFrame extends javax.swing.JFrame {
         qtySpn = new javax.swing.JSpinner();
         costLbl = new javax.swing.JLabel();
         message = new javax.swing.JLabel();
+        quitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FlexBox");
 
         boxList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        boxList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                boxListValueChanged(evt);
-            }
-        });
         jScrollPane1.setViewportView(boxList);
-
-        jButton1.setText("Test");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Box Properties"));
 
@@ -145,6 +133,7 @@ public class MainFrame extends javax.swing.JFrame {
         sealableTopChB.setText("Sealable Top");
 
         resetBtn.setText("Reset");
+        resetBtn.setToolTipText("Clears box properties. Doesn't cancel the order.");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetBtnActionPerformed(evt);
@@ -217,9 +206,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         qtySpn.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
-        costLbl.setText("cost");
-
-        message.setText("jLabel5");
+        quitBtn.setText("Quit");
+        quitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,26 +221,23 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(costLbl))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quitBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(qtySpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-                        .addComponent(addToOrderBTN))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(message)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(message)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(qtySpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addToOrderBTN))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,20 +257,13 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(costLbl)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(message))
+                    .addComponent(message)
+                    .addComponent(quitBtn))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Object[] list = {"War", "Famine", "Plague", "Death", "Rhonnie"};
-        boxList.setListData(list);
-        System.out.println(boxList.getModel().toString());
-        System.out.println(boxList.getModel().getClass());
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addToOrderBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderBTNActionPerformed
         BoxMaker boxMaker;
@@ -294,7 +276,8 @@ public class MainFrame extends javax.swing.JFrame {
                     sealableTopChB.getSelectedObjects() != null,
                     cardGradeCoB.getSelectedItem(), numColorsCoB.getSelectedItem(),
                     (int) qtySpn.getValue());
-            order.add(boxMaker.createBox());}
+            order.add(boxMaker.createBox());
+        }
         catch (NumberFormatException nfe) {
             validateInputs();
             return;
@@ -318,10 +301,6 @@ public class MainFrame extends javax.swing.JFrame {
         if (!dv.verify(boxHeightTB))
             boxHeightTB.requestFocusInWindow();
     }
-
-    private void boxListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_boxListValueChanged
-        System.out.println("pass");
-    }//GEN-LAST:event_boxListValueChanged
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
         boxWidthTB.setText("Width");
@@ -358,9 +337,6 @@ public class MainFrame extends javax.swing.JFrame {
             case "Grade 2":
                 // !RC
                 setLockChB(reinforcedCornersChB, false);
-                return;
-
-            case "Grade 3":
                 return;
 
             case "Grade 4":
@@ -426,6 +402,10 @@ public class MainFrame extends javax.swing.JFrame {
             setLockChB(reinforcedBottomChB, true);
         }
     }//GEN-LAST:event_reinforcedCornersChBFocusLost
+
+    private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_quitBtnActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="gui element mutators">
     private void setLockChB(JCheckBox chB, boolean state) {
@@ -496,7 +476,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox cardGradeCoB;
     private javax.swing.JLabel costLbl;
     private javax.swing.JPanel dimensionPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -506,6 +485,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel message;
     private javax.swing.JComboBox numColorsCoB;
     private javax.swing.JSpinner qtySpn;
+    private javax.swing.JButton quitBtn;
     private javax.swing.JCheckBox reinforcedBottomChB;
     private javax.swing.JCheckBox reinforcedCornersChB;
     private javax.swing.JButton resetBtn;

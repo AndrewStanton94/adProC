@@ -22,6 +22,7 @@ public abstract class Box {
 
         this.reinforcedCorners = reinforcedCorners;
         this.reinforcedBottom = reinforcedBottom;
+        this.sealedTop = sealedTop;
 
         this.cardGrade = cardGrade;
         this.numberOfColors = numberOfColors;
@@ -37,6 +38,7 @@ public abstract class Box {
 
         this.reinforcedCorners = false;
         this.reinforcedBottom = false;
+        this.sealedTop = sealedTop;
 
         this.cardGrade = cardGrade;
         this.numberOfColors = numberOfColors;
