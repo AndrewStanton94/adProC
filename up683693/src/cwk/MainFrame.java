@@ -344,7 +344,7 @@ public class MainFrame extends javax.swing.JFrame {
         boxHeightTB.setText("Height");
 
         cardGradeCoB.setSelectedIndex(0);
-        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5"}));
+        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5"}));
         numColorsCoB.setSelectedIndex(0);
         numColorsCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"No colours", "1 Colour", "2 Colours"}));
 
@@ -361,9 +361,6 @@ public class MainFrame extends javax.swing.JFrame {
         JComboBox cb = (JComboBox) evt.getSource();
 
         switch (cb.getSelectedItem().toString()) {
-            case "Card Grade":
-                // Pass
-                return;
             case "Grade 1":
                 // 0 CP
                 filterLists(numColorsCoB, false, new Object[]{"1 Colour", "2 Colours"});
@@ -424,13 +421,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void reinforcedBottomChBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reinforcedBottomChBFocusLost
         JCheckBox chB = (JCheckBox) evt.getSource();
-        if (chB.getSelectedObjects() == null){
-            // 2 cp
-            filterLists(numColorsCoB, false, new Object[]{"No colours", "1 Colour"});
-            // !RC
-            setLockChB(reinforcedCornersChB, false);
-        }
-        else {
+        if (chB.getSelectedObjects() != null){ 
+            // No action when not checked. Don't want issues for people tabing past
             // 2 .. 5 cg
             filterLists(cardGradeCoB, true, new Object[]{"Grade 1"});
             // 2 cp
@@ -440,9 +432,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void reinforcedCornersChBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reinforcedCornersChBFocusLost
         JCheckBox chB = (JCheckBox) evt.getSource();
-        if (chB.getSelectedObjects() == null) {
-        }
-        else{
+        if (chB.getSelectedObjects() != null){
             // 3 .. 5 cg
             filterLists(cardGradeCoB, true, new Object[]{"Grade 1", "Grade 2"});
             //  2 cp
@@ -461,10 +451,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void filterLists(JComboBox coB, boolean isCardGrade, Object[] invalidOptions) {
         ArrayList<String> allOptions = new ArrayList(); // Store all values for gui element
 
-        System.err.println(coB);
-
         if (isCardGrade) {
-            String[] cardOptions = {"Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5"};
+            String[] cardOptions = {"Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5"};
             allOptions.addAll(Arrays.asList(cardOptions));
         } else {
             String[] colourOptions = {"No colours", "1 Colour", "2 Colours"};
