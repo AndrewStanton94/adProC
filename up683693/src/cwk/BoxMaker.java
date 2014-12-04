@@ -77,29 +77,29 @@ public class BoxMaker {
             case 1:
                 Box boxT1 = new BoxType1(width, depth, height, sealedTop,
                                     cardGrade, qty);
-                message = boxT1.getPrice() + " added to order";
+                message = boxT1.getPriceStr() + " added to order";
                 return boxT1;
             case 2:
                 Box boxT2 = new BoxType2(width, depth, height, sealedTop,
                                     cardGrade, qty);
-                message = boxT2.getPrice() + " added to order";
+                message = boxT2.getPriceStr() + " added to order";
                 return boxT2;
             case 3:
                 Box boxT3 = new BoxType3(width, depth, height, sealedTop,
                                     cardGrade, qty);
-                message = boxT3.getPrice() + " added to order";
+                message = boxT3.getPriceStr() + " added to order";
                 return boxT3;
             case 4:
                 Box boxT4 = new BoxType4(width, depth, height, reinforcedBottom,
                                     reinforcedCorners, sealedTop, cardGrade,
                                     numberOfColors, qty);
-                message = boxT4.getPrice() + " added to order";
+                message = boxT4.getPriceStr() + " added to order";
                 return boxT4;
             case 5:
                 Box boxT5 = new BoxType5(width, depth, height, reinforcedBottom,
                                     reinforcedCorners, sealedTop, cardGrade,
                                     numberOfColors, qty);
-                message = boxT5.getPrice() + " added to order";
+                message = boxT5.getPriceStr() + " added to order";
                 return boxT5;
             default:
                 return null;

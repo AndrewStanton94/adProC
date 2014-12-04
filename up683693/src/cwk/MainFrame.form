@@ -239,7 +239,7 @@
                 <Property name="text" type="java.lang.String" value="Width"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="DimensionVarifier dv = new DimensionVarifier();&#xa;boxWidthTB.setInputVerifier(dv);"/>
+                <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="DimensionVarifier dv = new DimensionVarifier(message);&#xa;boxWidthTB.setInputVerifier(dv);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="boxDepthTB">

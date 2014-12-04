@@ -22,4 +22,13 @@ public class BoxType5 extends Box{
     public static BoxDescriptor getDescription() {
         return boxDesc;
     }
+    
+    public double getPrice() {
+        double baseCost = getBasePrice();
+        double additionalCosts = baseCost * 0.15;   // 2 colours
+        additionalCosts += baseCost * 0.12;         // Reinforced bottom
+        additionalCosts += baseCost * 0.08;         // Reinforced corners
+        additionalCosts += hasSealedTop() ? baseCost * 0.06 : 0;
+        return getBasePrice() + additionalCosts;
+    }
 }

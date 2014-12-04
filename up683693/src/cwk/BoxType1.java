@@ -21,4 +21,9 @@ public class BoxType1 extends Box{
     public static BoxDescriptor getDescription() {
         return boxDesc;
     }
+    
+    public double getPrice() {
+        double baseCost = getBasePrice();
+        return getBasePrice() + (hasSealedTop() ? baseCost * 0.06 : 0);
+    }
 }

@@ -47,31 +47,21 @@ public abstract class Box {
         return 2 * (width * depth + width * height + height * depth);
     }
 
-    public double getPrice() {
+    protected double getBasePrice(){
         double[] costFactors = {0, 0.5, 0.59, 0.7, 0.92, 1.35}; // 0 as placeholder
-        double baseCost = getSurfaceArea() * costFactors[cardGrade];
-        double fullCost = baseCost;
-
-        if (getNumberOfColors() > 1) {
-            if (getNumberOfColors() == 2) {
-                fullCost += baseCost * 0.15;
-            } else {
-                fullCost += baseCost * 0.12;
-            }
-        }
-
-        fullCost += hasReinforcedBottom() ? baseCost * 0.12 : 0;
-        fullCost += hasReinforcedCorners() ? baseCost * 0.08 : 0;
-
-        fullCost += hasSealedTop() ? baseCost * 0.06 : 0;
-
-        return fullCost * getQty();
+        return getSurfaceArea() * costFactors[cardGrade];
+    }
+    
+    public abstract double getPrice();
+    
+    public String getPriceStr(){
+        return String.format("£ %.2f", getPrice() * getQty());
     }
 
     //<editor-fold defaultstate="collapsed" desc="Accessors">
     public String toString(){
         String strOut = "Grade " + getCardGrade() + ": "+ getWidth() + " x " + getDepth() + " x " + getHeight() +
-            " @ " + getPrice();
+            " @ " + getPriceStr();
         return strOut;
     }
     

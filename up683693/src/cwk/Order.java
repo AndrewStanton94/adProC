@@ -35,6 +35,6 @@ public class Order {
     }
     
     public String getTotalCostStr(){
-        return String.valueOf(getTotalCost());
+        return String.format("£ %.2f", getTotalCost());
     }
 }

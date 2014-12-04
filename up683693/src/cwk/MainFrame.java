@@ -118,7 +118,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        DimensionVarifier dv = new DimensionVarifier();
+        DimensionVarifier dv = new DimensionVarifier(message);
         boxWidthTB.setInputVerifier(dv);
         boxDepthTB.setInputVerifier(dv);
         boxHeightTB.setInputVerifier(dv);
@@ -330,8 +330,6 @@ public class MainFrame extends javax.swing.JFrame {
             boxDepthTB.requestFocusInWindow();
         if (!dv.verify(boxHeightTB))
             boxHeightTB.requestFocusInWindow();
-        
-        message.setText(dv.getMessage());
     }
 
     private void boxListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_boxListValueChanged
@@ -450,7 +448,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void filterLists(JComboBox coB, boolean isCardGrade, Object[] invalidOptions) {
         ArrayList<String> allOptions = new ArrayList(); // Store all values for gui element
-
+        Object selected = coB.getSelectedItem();
         if (isCardGrade) {
             String[] cardOptions = {"Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5"};
             allOptions.addAll(Arrays.asList(cardOptions));
@@ -462,6 +460,9 @@ public class MainFrame extends javax.swing.JFrame {
         for (Object ob : invalidOptions)
             allOptions.remove((String) ob);
         coB.setModel(new DefaultComboBoxModel(allOptions.toArray()));
+        if (allOptions.contains(selected)){
+            coB.setSelectedItem(selected);
+        }
     }
     //</editor-fold>
 

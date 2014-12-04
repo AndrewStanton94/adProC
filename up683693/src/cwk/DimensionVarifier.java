@@ -8,6 +8,7 @@ package cwk;
 import java.awt.Color;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -19,26 +20,26 @@ public class DimensionVarifier extends InputVerifier {
     // 13/11/14 23:35
 
     String message;
+    JLabel messageLbl;
+    
+    public DimensionVarifier(JLabel messageLbl){
+        this.messageLbl = messageLbl;
+    }
     
     public boolean verify(JComponent input) {
         JTextField tb = (JTextField) input;
         try {
             float value = Float.parseFloat(tb.getText());
-            if (value > 0.1) {
+            if (value > 0.1 && value <= 3) {
                 tb.setBackground(Color.WHITE);
                 return true;
             }
-            else message = "Plese enter a value between 0.1 and 3 meters";
+            else messageLbl.setText("Plese enter a value between 0.1 and 3 meters");
         }
         catch(NumberFormatException nfe) {
-            message = "Please enter a number. (0.1 to 3 meters)";
-            System.err.println(nfe + " User has entered invalid data. Wrong type.");
+            messageLbl.setText("Please enter a number. (0.1 to 3 meters)");
         }
         tb.setBackground(Color.red);
         return false;
-    }
-    
-    public String getMessage(){
-        return message;
     }
 }
