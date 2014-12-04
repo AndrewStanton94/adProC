@@ -2,3 +2,6 @@
 /up683693/build/
 /up683693/dist/
 /TwoDShapes/nbproject/private/
+*~*
+*.swp
+*.db
