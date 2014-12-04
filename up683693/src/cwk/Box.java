@@ -27,7 +27,22 @@ public abstract class Box {
         this.numberOfColors = numberOfColors;
         this.qty = qty;
     }
+    
+    public Box(double width, double depth, double height,
+            boolean sealedTop,
+            int cardGrade, int numberOfColors, int qty) {
+        this.width = width;
+        this.depth = depth;
+        this.height = height;
 
+        this.reinforcedCorners = false;
+        this.reinforcedBottom = false;
+
+        this.cardGrade = cardGrade;
+        this.numberOfColors = numberOfColors;
+        this.qty = qty;
+    }
+    
     public double getSurfaceArea() {
         return 2 * (width * depth + width * height + height * depth);
     }
@@ -54,6 +69,12 @@ public abstract class Box {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Accessors">
+    public String toString(){
+        String strOut = "Grade " + getCardGrade() + ": "+ getWidth() + " x " + getDepth() + " x " + getHeight() +
+            " @ " + getPrice();
+        return strOut;
+    }
+    
     public static BoxDescriptor getDescription() {
         return boxDesc;
     }

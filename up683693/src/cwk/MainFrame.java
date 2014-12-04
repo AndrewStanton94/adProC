@@ -57,6 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
         addToOrderBTN = new javax.swing.JButton();
         qtySpn = new javax.swing.JSpinner();
         costLbl = new javax.swing.JLabel();
+        message = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FlexBox");
@@ -122,7 +123,7 @@ public class MainFrame extends javax.swing.JFrame {
         boxDepthTB.setInputVerifier(dv);
         boxHeightTB.setInputVerifier(dv);
 
-        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Card Grade", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
+        cardGradeCoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5" }));
         cardGradeCoB.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 cardGradeCoBFocusLost(evt);
@@ -214,7 +215,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sealableTopChB)
                     .addComponent(resetBtn))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -234,6 +235,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         costLbl.setText("cost");
 
+        message.setText("jLabel5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -252,12 +255,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(qtySpn))
-                            .addComponent(addToOrderBTN))
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(qtySpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addToOrderBTN))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(message)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -272,14 +276,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(qtySpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(qtySpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addToOrderBTN))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(costLbl)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(addToOrderBTN))
+                    .addComponent(message))
                 .addContainerGap())
         );
 
@@ -301,10 +306,11 @@ public class MainFrame extends javax.swing.JFrame {
                     reinforcedBottomChB.getSelectedObjects() != null,
                     reinforcedCornersChB.getSelectedObjects() != null,
                     sealableTopChB.getSelectedObjects() != null,
-                    cardGradeCoB.getSelectedIndex(), numColorsCoB.getSelectedIndex(),
+                    cardGradeCoB.getSelectedItem(), numColorsCoB.getSelectedItem(),
                     (int) qtySpn.getValue());
             order.add(bm.createBox());
             boxList.setListData(order.getBoxes());
+            message.setText(bm.getMessage());
             costLbl.setText(order.getTotalCostStr());
         } catch (NumberFormatException nfe) {
 //            System.err.println(nfe);
@@ -324,7 +330,8 @@ public class MainFrame extends javax.swing.JFrame {
             boxDepthTB.requestFocusInWindow();
         if (!dv.verify(boxHeightTB))
             boxHeightTB.requestFocusInWindow();
-
+        
+        message.setText(dv.getMessage());
     }
 
     private void boxListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_boxListValueChanged
@@ -390,8 +397,9 @@ public class MainFrame extends javax.swing.JFrame {
         JComboBox cb = (JComboBox) evt.getSource();
 
         switch (cb.getSelectedItem().toString()) {
-            case "No colour":
+            case "No colours":
                 // 1 ..3 Cg
+                filterLists(cardGradeCoB, true, new Object[]{"Grade 4", "Grade 5"});
                 // !RB
                 setLockChB(reinforcedBottomChB, false);
                 // !RC
@@ -400,6 +408,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             case "1 Colour":
                 // 2 .. 4 Cg
+                filterLists(cardGradeCoB, true, new Object[]{"Grade 1", "Grade 5"});
                 // !RB
                 setLockChB(reinforcedBottomChB, false);
                 // !RC
@@ -408,6 +417,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             case "2 Colours":
                 // 2 .. 5 Cg
+                filterLists(cardGradeCoB, true, new Object[]{"Grade 1"});
                 return;
         }
     }//GEN-LAST:event_numColorsCoBFocusLost
@@ -422,6 +432,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else {
             // 2 .. 5 cg
+            filterLists(cardGradeCoB, true, new Object[]{"Grade 1"});
             // 2 cp
             filterLists(numColorsCoB, false, new Object[]{"No colours", "1 Colour"});
         }
@@ -433,6 +444,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else{
             // 3 .. 5 cg
+            filterLists(cardGradeCoB, true, new Object[]{"Grade 1", "Grade 2"});
             //  2 cp
             filterLists(numColorsCoB, false, new Object[]{"No colours", "1 Colour"});
             // RB
@@ -516,6 +528,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel message;
     private javax.swing.JComboBox numColorsCoB;
     private javax.swing.JSpinner qtySpn;
     private javax.swing.JCheckBox reinforcedBottomChB;

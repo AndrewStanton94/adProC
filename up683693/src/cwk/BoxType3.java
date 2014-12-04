@@ -15,7 +15,7 @@ public class BoxType3 extends Box{
     public BoxType3(double width, double depth, double height,
             boolean sealedTop,
             int cardGrade, int qty) {
-        super(width, depth, height, false, false, sealedTop, cardGrade, 2, qty);
+        super(width, depth, height, sealedTop, cardGrade, 2, qty);
     }
     
     public static BoxDescriptor getDescription() {

@@ -4,8 +4,9 @@ x Box creation system
 x Create Add button
 
 x Create reset button
-- Reapply filters to looseFocus event
-    - Create filter for CoB elements
+x Reapply filters to looseFocus event
+    x Create filter for CoB elements
+    x Apply to cg elements
 
 x Set up Box storage
     ArrayList

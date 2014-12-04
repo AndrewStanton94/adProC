@@ -10,7 +10,7 @@ package cwk;
  * @author up683693
  */
 public class BoxMaker {
-
+    String message;
     double width, depth, height = 0;
     boolean reinforcedCorners, reinforcedBottom, sealedTop = false;
     int cardGrade, numberOfColors = 0, qty = 1;
@@ -25,7 +25,7 @@ public class BoxMaker {
     public BoxMaker(
             double width, double depth, double height,
             boolean reinforcedBottom, boolean reinforcedCorners, boolean sealedTop,
-            int cardGrade, int numberOfColors, int qty) {
+            Object cardGrade, Object numberOfColors, int qty) {
         this.width = width;
         this.depth = depth;
         this.height = height;
@@ -34,37 +34,79 @@ public class BoxMaker {
         this.reinforcedCorners = reinforcedCorners;
         this.sealedTop = sealedTop;
 
-        this.cardGrade = cardGrade;
-        this.numberOfColors = numberOfColors;
+        this.cardGrade = getCardGrade(cardGrade);
+        this.numberOfColors = getColours(numberOfColors);
+        
         this.qty = qty;
     }
 
-    public int getType() {
+    private int getCardGrade(Object card){
+        switch((String) card){
+            case "Grade 1": return 1;
+            case "Grade 2": return 2;
+            case "Grade 3": return 3;
+            case "Grade 4": return 4;
+            case "Grade 5": return 5;
+        }
+        return -1;
+    }
+    
+    private int getColours(Object numberOfColors){
+        switch ((String) numberOfColors){
+            case "No colours": return 0;
+            case "1 Colour": return 1;
+            case "2 Colours": return 2;
+        }
+        return -1;
+    }
+    
+    private int getType() {
         for(int i = 0; i < boxDescs.length; i++)
         {
             if (boxDescs[i].match(cardGrade, numberOfColors, reinforcedBottom, reinforcedCorners)){
-                System.err.println("Match");
                 return i + 1;
             }
         }
         System.err.println("Does not match");
+        message = "Invalid combination, please try again";
         return -1;
     }
     
     public Box createBox(){
         switch (getType()){
             case 1:
-                return new BoxType1(width, depth, height, sealedTop, cardGrade, qty);
+                Box boxT1 = new BoxType1(width, depth, height, sealedTop,
+                                    cardGrade, qty);
+                message = boxT1.getPrice() + " added to order";
+                return boxT1;
             case 2:
-                return new BoxType2(width, depth, height, sealedTop, cardGrade, qty);
+                Box boxT2 = new BoxType2(width, depth, height, sealedTop,
+                                    cardGrade, qty);
+                message = boxT2.getPrice() + " added to order";
+                return boxT2;
             case 3:
-                return new BoxType3(width, depth, height, sealedTop, cardGrade, qty);
+                Box boxT3 = new BoxType3(width, depth, height, sealedTop,
+                                    cardGrade, qty);
+                message = boxT3.getPrice() + " added to order";
+                return boxT3;
             case 4:
-                return new BoxType4(width, depth, height, reinforcedBottom, reinforcedCorners, sealedTop, cardGrade, numberOfColors, qty);
+                Box boxT4 = new BoxType4(width, depth, height, reinforcedBottom,
+                                    reinforcedCorners, sealedTop, cardGrade,
+                                    numberOfColors, qty);
+                message = boxT4.getPrice() + " added to order";
+                return boxT4;
             case 5:
-                return new BoxType5(width, depth, height, reinforcedBottom, reinforcedCorners, sealedTop, cardGrade, numberOfColors, qty);
+                Box boxT5 = new BoxType5(width, depth, height, reinforcedBottom,
+                                    reinforcedCorners, sealedTop, cardGrade,
+                                    numberOfColors, qty);
+                message = boxT5.getPrice() + " added to order";
+                return boxT5;
             default:
                 return null;
         }
+    }
+    
+    public String getMessage(){
+        return message;
     }
 }
