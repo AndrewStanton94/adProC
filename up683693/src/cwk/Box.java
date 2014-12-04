@@ -2,7 +2,7 @@ package cwk;
 
 /**
  *
- * @author Andrew
+ * @author UP683693
  */
 public abstract class Box {
 
@@ -60,7 +60,7 @@ public abstract class Box {
 
     //<editor-fold defaultstate="collapsed" desc="Accessors">
     public String toString(){
-        String strOut = "Grade " + getCardGrade() + ": "+ getWidth() + " x " + getDepth() + " x " + getHeight() +
+        String strOut = getQty() + " of " + "Grade " + getCardGrade() + ": "+ getWidth() + " x " + getDepth() + " x " + getHeight() +
             " @ " + getPriceStr();
         return strOut;
     }

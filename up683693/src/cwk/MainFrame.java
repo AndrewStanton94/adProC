@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cwk;
 
 import java.util.ArrayList;
@@ -13,7 +8,7 @@ import javax.swing.JComboBox;
 
 /**
  *
- * @author Andrew
+ * @author UP683693
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -43,7 +38,6 @@ public class MainFrame extends javax.swing.JFrame {
         boxWidthTB = new javax.swing.JTextField();
         boxDepthTB = new javax.swing.JTextField();
         boxHeightTB = new javax.swing.JTextField();
-        areaLabel = new javax.swing.JLabel();
         cardGradeCoB = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -87,24 +81,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         boxHeightTB.setText("Height");
 
-        areaLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        areaLabel.setLabelFor(dimensionPanel);
-        areaLabel.setText("Total Area: ");
-
         javax.swing.GroupLayout dimensionPanelLayout = new javax.swing.GroupLayout(dimensionPanel);
         dimensionPanel.setLayout(dimensionPanelLayout);
         dimensionPanelLayout.setHorizontalGroup(
             dimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dimensionPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(boxWidthTB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(boxDepthTB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(boxHeightTB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(areaLabel)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addComponent(boxHeightTB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         dimensionPanelLayout.setVerticalGroup(
             dimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,8 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(dimensionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boxWidthTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxDepthTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxHeightTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(areaLabel))
+                    .addComponent(boxHeightTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -172,27 +158,25 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dimensionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(numColorsCoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cardGradeCoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(reinforcedBottomChB)
-                                .addGap(18, 18, 18)
-                                .addComponent(reinforcedCornersChB)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(sealableTopChB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(resetBtn)))
-                .addContainerGap())
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(numColorsCoB, 0, 103, Short.MAX_VALUE)
+                            .addComponent(cardGradeCoB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(dimensionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(sealableTopChB)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(resetBtn))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(reinforcedBottomChB)
+                            .addGap(18, 18, 18)
+                            .addComponent(reinforcedCornersChB))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,18 +234,19 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(costLbl))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(qtySpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                         .addComponent(addToOrderBTN))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(message)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(message)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -299,8 +284,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addToOrderBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderBTNActionPerformed
+        BoxMaker boxMaker;
         try {
-            BoxMaker bm = new BoxMaker(Double.parseDouble(boxWidthTB.getText()),
+            boxMaker = new BoxMaker(Double.parseDouble(boxWidthTB.getText()),
                     Double.parseDouble(boxWidthTB.getText()),
                     Double.parseDouble(boxHeightTB.getText()),
                     reinforcedBottomChB.getSelectedObjects() != null,
@@ -308,14 +294,15 @@ public class MainFrame extends javax.swing.JFrame {
                     sealableTopChB.getSelectedObjects() != null,
                     cardGradeCoB.getSelectedItem(), numColorsCoB.getSelectedItem(),
                     (int) qtySpn.getValue());
-            order.add(bm.createBox());
-            boxList.setListData(order.getBoxes());
-            message.setText(bm.getMessage());
-            costLbl.setText(order.getTotalCostStr());
-        } catch (NumberFormatException nfe) {
-//            System.err.println(nfe);
+            order.add(boxMaker.createBox());}
+        catch (NumberFormatException nfe) {
             validateInputs();
+            return;
         }
+        boxList.setListData(order.getBoxes());
+        message.setText(boxMaker.getMessage());
+        costLbl.setText(order.getTotalCostStr());
+        
     }//GEN-LAST:event_addToOrderBTNActionPerformed
 
     private void validateInputs() {
@@ -502,7 +489,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addToOrderBTN;
-    private javax.swing.JLabel areaLabel;
     private javax.swing.JTextField boxDepthTB;
     private javax.swing.JTextField boxHeightTB;
     private javax.swing.JList boxList;

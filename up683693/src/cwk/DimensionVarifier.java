@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cwk;
 
 import java.awt.Color;
@@ -13,11 +8,11 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Andrew
+ * @author UP683693
  */
 public class DimensionVarifier extends InputVerifier {
-    // Referenced https://docs.oracle.com/javase/7/docs/api/javax/swing/InputVerifier.html
-    // 13/11/14 23:35
+    // Referenced 13/11/14 23:35
+    // https://docs.oracle.com/javase/7/docs/api/javax/swing/InputVerifier.html
 
     String message;
     JLabel messageLbl;

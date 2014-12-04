@@ -7,7 +7,7 @@ package cwk;
 
 /**
  *
- * @author Andrew
+ * @author UP683693
  */
 public class BoxType3 extends Box{
     public final static BoxDescriptor boxDesc = new BoxDescriptor(2, 5, 2, false, false);

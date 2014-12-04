@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cwk;
 
 /**
  *
- * @author Andrew
+ * @author UP683693
  */
 public class BoxType4 extends Box{
     public final static BoxDescriptor boxDesc = new BoxDescriptor(2, 5, 2, true, false);
