@@ -26,15 +26,23 @@
     </p>
 
     <p>
-        The dimensions are validated by DimensionVarifiers, which extend the abstract class InputVarifiers. Errors from the text boxes are displayed imediately in messageLbl. Messages are sent about type and range issues.
+        The dimensions are validated by DimensionVarifiers, which extend the abstract class InputVarifiers. Errors from the text boxes are displayed imediately in messageLbl on the GUI. Messages are sent about type and range issues.
     </p>
 
     <p>
-        The box data is stored in child classes of abstract superclass Box. Most of the functions are defined in the superclass, though abstract method getPrice() is overloaded to ensure all requirements are covered without any unneeded checks taking place. Thus improving efficiency.
+        The box data is stored in child classes of abstract superclass Box. Most of the functions are defined in the superclass, though abstract method getPrice() is overloaded to ensure all requirements are covered without any unneeded checks taking place. Thus improving efficiency. In addition to attributes for the individual box there is a quantity and a BoxMatcher. Placing the quantity in the box seemed more efficient than creating a new collection. The BoxMatcher is a static final attribute.
     </p>
 
     <p>
         Determining the box type and creating it is done by BoxMaker. The parameters that effect the type are fed into the static instances of BoxMatcher for each Box sub type, a result of true means the box type has been found.
+    </p>
+
+    <p>
+        BoxMatcher has attributes that describe the valid values for the box types and methods that check if the given arguement is valid.
+    </p>
+
+    <p>
+        Order is used to store the created boxes in an ArrayList. It has methods to add a new box, return total cost as either a number or a formatted string, and return all boxes as Object[].
     </p>
 </section>
 

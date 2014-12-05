@@ -5,7 +5,8 @@ package cwk;
  * @author UP683693
  */
 public class BoxType1 extends Box{
-    public final static BoxDescriptor boxDesc = new BoxDescriptor(1, 3, 0, false, false);
+    public final static BoxDescriptor boxDesc = new BoxDescriptor(1, 3, 0, 
+                                                        false, false);
 
     public BoxType1(double width, double depth, double height,
             boolean sealedTop,
